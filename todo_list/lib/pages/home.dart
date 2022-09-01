@@ -8,8 +8,6 @@ import '../widgets/input_list.dart';
 
 class Home extends StatefulWidget {
 
-  TextEditingController textController = TextEditingController();
-
   Home({super.key});
 
   @override
@@ -34,7 +32,6 @@ class _HomeState extends State<Home> {
       });
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
