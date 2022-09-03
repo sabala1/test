@@ -8,3 +8,4 @@ const newSchema = new Schema({
 })
 
 export default mongoose.model("Information", newSchema);
+

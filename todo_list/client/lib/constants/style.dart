@@ -7,6 +7,12 @@ TextStyle tb1Style() => TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle tb2Style() => TextStyle(
+  fontSize: 18,
+  color: cBlack,
+  fontWeight: FontWeight.normal,
+);
+
 ButtonStyle bgPinkStyle () => ElevatedButton.styleFrom(
   backgroundColor: cPink,
     shape: RoundedRectangleBorder(
