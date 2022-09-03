@@ -1,63 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/models/db_model.dart';
-import 'package:todo_list/widgets/todo_list.dart';
-
-import '../constants/colors.dart';
-import '../models/todo_model.dart';
-import '../widgets/input_list.dart';
+import 'package:todo_list/constants/colors.dart';
+import 'package:todo_list/pages/inform.dart';
+import 'package:todo_list/pages/listcard.dart';
 
 class Home extends StatefulWidget {
-
-  Home({super.key});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  List<Widget> widgets = [
+    Inform(),
+    ListCard(),
+  ];
+  List<IconData> icons = [
+    Icons.feed,
+    Icons.list,
+  ];
+  List<String> titles = [
+    'Information',
+    'ListCard',
+  ];
+  int indexPosition = 0;
+  List<BottomNavigationBarItem> BottomNavigationBarItems = [];
 
-  var db = DBTodo();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    int i = 0;
 
-  void addItem(ToDo todo) async{
-    await db.insertTodo(todo);
-    setState(() {
-      
-    });
+    for (var item in titles) {
+      BottomNavigationBarItems.add(
+        createBottomNivigationBarItem(icons[i], item),
+      );
+      i++;
+    }
   }
 
-  void deleteItem(ToDo todo) async{
-      await db.deleteTodo(todo);
-      setState(() {
-        
-      });
-  }
+  BottomNavigationBarItem createBottomNivigationBarItem(
+          IconData iconData, String string) =>
+      BottomNavigationBarItem(icon: Icon(iconData), label: string);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgGrey,
-      appBar: _buildAppBar(),
-      body: Column(
-        children: [
-          TodoList(inserFunction: addItem, deleteFunction: deleteItem,),
-          InPutList(inserFunction: addItem,),
-        ],
-      ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: bgGrey,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'ToDo List',
-            style: TextStyle(color: cBlue),
-          )
-        ],
+      body: widgets[indexPosition],
+      bottomNavigationBar: BottomNavigationBar(
+        selectedIconTheme: IconThemeData(color: cPink),
+        unselectedIconTheme: IconThemeData(color: cBlue),
+        items: BottomNavigationBarItems,
+        currentIndex: indexPosition,
+        onTap: (value) {
+          setState(() {
+            indexPosition = value;
+          });
+        },
       ),
     );
   }

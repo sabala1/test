@@ -1,20 +1,10 @@
 import mongoose from "mongoose";
+const Schema = mongoose.Schema
 
-const { Schema } = mongoose;
+const newSchema = new Schema({
+    namelast:String,
+    phone:String,
+    address:String
+})
 
-const ImformationScema = new mongoose.Schema ({
-    namelast:{
-        type: String,
-        required: true
-    },
-    phone:{
-        type: String,
-        required: true
-    },
-    address:{
-        type: String,
-        required: true
-    }
-});
-
-export default mongoose.model("Information", ImformationScema);
+export default mongoose.model("Information", newSchema);
